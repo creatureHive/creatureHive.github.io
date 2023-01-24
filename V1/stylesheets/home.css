@@ -17,4 +17,5 @@ body {
     opacity: 8;
     border-bottom: 2px solid darkslategray;
     border-right: 2px solid darkslategray;
+    border-style: inline;
 }
