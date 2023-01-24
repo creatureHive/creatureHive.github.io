@@ -1,44 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <style>
-            
-            .bar{
-                list-style-type: none;
-                margin-left: auto;
-                margin-right: auto;
-                padding: 0;
-                background-color: #697296;
-                opacity: 8;
-                border-bottom: 2px solid darkslategray;
-                border-right: 2px solid darkslategray; 
-                position: fixed;
-                display: inline;
-                top:0;
-                width: 100%;
-                height: 50px;
-                text-align: center;
-                
-            }
-            canvas {
-                border: 2px solid black;
-                background-color: blue;
-                margin-left: auto;
-                margin-right: auto;
-                top:300px;
-                padding-left: 0;
-                padding-right: 0;
-                display: block;
-                position:relative;
-                width: 800px;
-            }
-            li {
-                display: inline;
-                text-align: center;
-                padding: 10px;
-            }
-           
-        </style>
+        <link rel="stylesheet" href="../stylesheets/games.css">
     </head>
     <body>
         <ul class="bar" cellpadding>
@@ -53,24 +16,7 @@
             <body onload="startGame()">
                 <p><b>Baker's Dozen</b></p>
                 <br>
-            <script>
-                var canvasWidth = 800;
-                var canvasHeight = 600;
-
-                function startGame() {
-                    gameCanvas.start();
-                }
-
-                var gameCanvas = {
-                    canvas: document.createElement("canvas"),
-                    start: function() {
-                        this.canvas.width = canvasWidth;
-                        this.canvas.height = canvasHeight;
-                        this.context = this.canvas.getContext("2d"); 
-                        document.body.insertBefore(this.canvas, document.body.childNodes[0]);
-                    }
-                }
-            </script>
+                <script src="/scripts/bakers.js"></script>
         </div>
     </body>
 </html>
