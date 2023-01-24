@@ -7,7 +7,6 @@
 }
 .main{
     background-color: #776996;
-    z-index: 500;
     border-bottom: 2px solid darkslategray;
     border-right: 2px solid darkslategray;
     width: 75%;
