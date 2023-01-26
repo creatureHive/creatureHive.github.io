@@ -19,9 +19,10 @@ body{
 }
 #canvas {
     border: 2px solid black;
-    background-color: blue;
+    background:url("../pics/kitchen.png");
     margin:auto;
-    width: 90%;
-    height: 70%;
+    /* this is the game box */
+    width: 75%;
+    height: 65%;
 }
 
