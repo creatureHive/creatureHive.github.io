@@ -25,4 +25,19 @@ body{
     width: 75%;
     height: 65%;
 }
+.draggable{
+    width: 100px;
+    height: auto;
+    cursor:grab;
+}
+#bowl{
+    width:200px;
+    height: auto;
+}
+
+.draggable.dragging{
+    opacity: .5;
+    cursor:grab;
+}
+
 

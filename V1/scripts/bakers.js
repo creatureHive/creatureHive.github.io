@@ -1,21 +1,20 @@
-var canvasWidth=800;
-var canvasHeight=500;
+const draggables = document.querySelectorAll('.draggable')
+const containers = document.querySelectorAll('.container')
 
-var kitchen=document.getElementById("canvas");
+draggables.forEach(draggable => {
+    draggable.addEventListener('dragstart', () => {
+        draggable.classList.add('dragging')
+    })
 
-function startGame() {
-    gameCanvas.start();
+    draggable.addEventListener('dragend', () => {
+        draggable.classList.remove('dragging')
+    })
+})
 
-    player= new createKitchen(30,30,10)
-
-}
-
-var gameCanvas = {
-    canvas: document.createElement("canvas"),
-    start: function() {
-    this.canvas.width=canvasWidth;
-    this.canvas.height=canvasHeight;
-    this.context = this.canvas.getContext("2d"); 
-    document.body.insertBefore(this.canvas, document.body.childNodes[0]);
-    }
-}
+containers.forEach(container => {
+    container.addEventListener('dragover', e => {
+        e.preventDefault()
+        const draggable = document.querySelector('.dragging')
+        container.appendChild(draggable)
+    })
+})
