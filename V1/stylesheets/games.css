@@ -31,8 +31,12 @@ body{
     cursor:grab;
 }
 #bowl{
+    position:absolute;
     width:200px;
     height: auto;
+}
+#counter{
+    position: fixed;
 }
 
 .draggable.dragging{
