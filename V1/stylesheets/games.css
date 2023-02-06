@@ -19,7 +19,7 @@ body{
 }
 #canvas {
     border: 2px solid black;
-    background:url("../pics/kitchen.png");
+    background:url("../pics/gameAssets/kitchen.png");
     margin:auto;
     /* this is the game box */
     width: 75%;
