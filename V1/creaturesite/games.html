@@ -2,21 +2,36 @@
 <html>
     <head>
         <link rel="stylesheet" href="../stylesheets/games.css">
+        <script src="../scripts/bakers.js" defer></script>
+        <title>Creature Arcade</title>
+        <link rel="stylesheet" href="../stylesheets/main.css">
     </head>
     <body>
-        <ul class="bar" cellpadding>
-                <li><a href="home.html">Home Page</a></li>
-                <li><a href="account.html">My Account</a></li>
-                <li><a href="store.html">Store Page</a></li>
-                <li><a href="games.html">Games</a></li>
-        </ul> 
-        <br>
-        <br>
-        <div id="canvas">
-            <body onload="startGame()">
-                <p><b>Baker's Dozen</b></p>
-                <br>
-                <script src="/scripts/bakers.js"></script>
+        <header>
+            <nav>
+                <a href="/V1/creaturesite/home.html">Home</a>
+                <a href="/V1/creaturesite/account.html">My Account</a>
+                <a href="/V1/creaturesite/games.html">Games</a>
+                <a href="/V1/creaturesite/store.html">Store</a>
+            </nav>
+        </header>
+        <div class="main">
+            
+            <br>
+            <p align="center"><b>Baker's Dozen</b></p>
+            <br>
+            <div id="canvas">
+                <div class="container">
+                    <img src="../pics/gameAssets/water.png" class="draggable" draggable="true">
+                    <img src="../pics/gameAssets/cornmeal.png" class="draggable" draggable="true">
+                    <img src="../pics/gameAssets/flour.png" class="draggable" draggable="true">
+                </div>
+                <div class="container" id="counter">
+                    <img src="../pics/gameAssets/empty_bowl.png" id="bowl">
+                </div>
+            </div>
         </div>
+        <br>
+        <br>
     </body>
 </html>

@@ -1,34 +1,29 @@
-.bar{
-    list-style-type: none;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 0;
-    background-color: #697296;
-    opacity: 8;
-    border-bottom: 2px solid darkslategray;
-    border-right: 2px solid darkslategray; 
-    position: fixed;
-    display: inline;
-    top:0;
-    width: 100%;
-    height: 50px;
-    text-align: center;
-    
-}
-canvas {
+
+#canvas {
     border: 2px solid black;
-    background-color: blue;
-    margin-left: auto;
-    margin-right: auto;
-    top:300px;
-    padding-left: 0;
-    padding-right: 0;
-    display: block;
-    position:relative;
-    width: 800px;
+    background:url("../pics/gameAssets/kitchen.png");
+    margin:auto;
+    /* this is the game box */
+    width: 75%;
+    height: 65%;
 }
-li {
-    display: inline;
-    text-align: center;
-    padding: 10px;
+.draggable{
+    width: 100px;
+    height: auto;
+    cursor:grab;
 }
+#bowl{
+    position:absolute;
+    width:200px;
+    height: auto;
+}
+#counter{
+    position: fixed;
+}
+
+.draggable.dragging{
+    opacity: .5;
+    cursor:grab;
+}
+
+

@@ -1,16 +1,20 @@
-var canvasWidth = 800;
-                var canvasHeight = 600;
+const draggables = document.querySelectorAll('.draggable')
+const containers = document.querySelectorAll('.container')
 
-                function startGame() {
-                    gameCanvas.start();
-                }
+draggables.forEach(draggable => {
+    draggable.addEventListener('dragstart', () => {
+        draggable.classList.add('dragging')
+    })
 
-                var gameCanvas = {
-                    canvas: document.createElement("canvas"),
-                    start: function() {
-                        this.canvas.width = canvasWidth;
-                        this.canvas.height = canvasHeight;
-                        this.context = this.canvas.getContext("2d"); 
-                        document.body.insertBefore(this.canvas, document.body.childNodes[0]);
-                    }
-                }
+    draggable.addEventListener('dragend', () => {
+        draggable.classList.remove('dragging')
+    })
+})
+
+containers.forEach(container => {
+    container.addEventListener('dragover', e => {
+        e.preventDefault()
+        const draggable = document.querySelector('.dragging')
+        container.appendChild(draggable)
+    })
+})
