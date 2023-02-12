@@ -1,23 +1,4 @@
 
-body {
-    background-color:#698896;
-}
-.main{
-    background-color: #776996;
-    border-bottom: 2px solid darkslategray;
-    border-right: 2px solid darkslategray;
-    width: 75%;
-    height: 700px;
-    margin:auto;
-    opacity: 8;
-}
-.bar{
-    background-color: #697296;
-    opacity: .8;
-    border-bottom: 2px solid darkslategray;
-    border-right: 2px solid darkslategray;
-    border-style: inline;
-}
 #pets{
     float:right;
 }
