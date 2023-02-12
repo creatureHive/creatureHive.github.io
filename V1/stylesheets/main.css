@@ -13,16 +13,17 @@ body {
 
 }
 nav {
+    border: #664147 3px solid;
     background-color: #987671;
-    border-bottom: 2px solid darkslategray;
-    border-right: 2px solid darkslategray;
+    font-weight: bold;
     width:35%;
     height: 45px;
-    padding-top: 12px;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
     display: flex;
+    font-family: monospace;
+    border-radius: 10px;
   
 }
 nav a{
@@ -30,13 +31,13 @@ nav a{
     border-right: black solid 1px;
     position: relative;
     width:100%;
-    margin-top:-12px;
     font-family: monospace;
     font-size: 12pt;
 }
-nav a:first-child{
-    border-left: black solid 1px;
+nav a:last-child{
+    border-right: none;
 }
+
 .bar{
     background-color: #987671;
     opacity: 8;
