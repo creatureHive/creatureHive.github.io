@@ -1,0 +1,20 @@
+#innermain{
+    width:95%;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: #5296a5;
+    border-bottom: 2px solid darkslategray;
+    border-right: 2px solid darkslategray;
+    display: flex;
+    overflow: hidden;
+}
+.thumbnail{
+    width: 250px;
+    height: 200px;
+    background-color: #34707e;
+    margin:2%;
+    min-width: 200px;
+    min-height: 150px;
+    text-align: center;
+}
+
