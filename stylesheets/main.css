@@ -82,6 +82,7 @@ a:active{
     display:flex;
     flex-direction: column;
     overflow:hidden;
+    margin-left:0;
     
 }
 #sidebar a{
