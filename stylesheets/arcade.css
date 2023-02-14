@@ -19,5 +19,15 @@
     font-family: monospace;
     font-weight:bold;
     font-size:12pt;
+    border-radius: 15px;
+    border:#105b76 solid 5px;
+    overflow:hidden;
+    padding-bottom: 10px;
 }
+
+.thumbnail img{
+    width:100%;
+    
+}
+
 
