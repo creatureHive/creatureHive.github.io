@@ -16,5 +16,8 @@
     min-width: 200px;
     min-height: 150px;
     text-align: center;
+    font-family: monospace;
+    font-weight:bold;
+    font-size:12pt;
 }
 
