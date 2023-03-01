@@ -1,0 +1,23 @@
+#loginform{
+    border-radius: 30px;
+    padding:20px;
+    background-color: aquamarine;
+    visibility: hidden;
+    animation: appear 2s linear 1;
+    animation-fill-mode: forwards;
+}
+.myClass {
+    width:fit-content;
+    height:fit-content;
+    font-size:28pt;
+}
+
+@keyframes appear{
+    0%{
+        opacity:0;
+    }
+    100%{
+        opacity:1;
+        visibility: visible;
+    }
+}

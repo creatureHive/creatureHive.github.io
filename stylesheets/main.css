@@ -14,7 +14,6 @@ body {
     padding: 10px;
     display: flex;
     text-align: center;
-
 }
 #loginform{
     margin:auto;
@@ -27,6 +26,8 @@ body {
     width:150px;
     background-color: #5296a5;
     text-align: center;
+    padding:10px;
+    border-radius: 3px;
 
 
 }
