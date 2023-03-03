@@ -22,19 +22,16 @@
 
 //each player starts with these values
 const board = [
-[0,3,3,3,3,3,3], //0 is first players pit
-[3,3,3,3,3,3,0]  //0 is second players pit
+[0,4,4,4,4,4,4], //0 is first players pit
+[4,4,4,4,4,4,0]  //0 is second players pit
 ];
 
 console.log(board);
 
 //a turn
-function moveStones(board){
-    let choice= prompt("Which pot will you choose from: ");
-    let stones = board[1,choice+1];
-    for(i=0;i<stones;i++){
-        
-    }
+
+function moveStones(pot){
+    
 }
 
 
