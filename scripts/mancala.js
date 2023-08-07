@@ -19,19 +19,54 @@
 //score pits start at 0 
 //each pot holds 3 stones at start
 
-
-//each player starts with these values
 const board = [
-[0,4,4,4,4,4,4], //0 is first players pit
-[4,4,4,4,4,4,0]  //0 is second players pit
+    [0, 4, 4, 4, 4, 4, 4],  // Player 1's pits
+    [4, 4, 4, 4, 4, 4, 0]   // Player 2's pits
 ];
 
-console.log(board);
+let playerTurn = true;  // Player 1 starts
 
-//a turn
 
-function moveStones(pot){
-    
+function moveStones(playerIndex, pitIndex) {
+    const stonesToMove = board[playerIndex][pitIndex];
+    board[playerIndex][pitIndex] = 0;
+
+    let currentPlayerIndex = playerIndex;
+    let currentPitIndex = pitIndex;
+
+    while (stonesToMove > 0) {
+        currentPitIndex = (currentPitIndex + 1) % 7;  // Circular pit indexing
+        
+        if (currentPlayerIndex === 1 && currentPitIndex === 0) {
+            continue;  // Skip opponent's Mancala pit
+        }
+
+        board[currentPlayerIndex][currentPitIndex]++;
+        stonesToMove--;
+    }
+}
+function captureStones(playerIndex, pitIndex) {
+    const stonesCaptured = board[playerIndex][pitIndex];
+    if (stonesCaptured === 1 && board[playerIndex][pitIndex] === 0) {
+        const oppositePitIndex = 6 - pitIndex;  // Calculate the opposite pit index
+        const capturedStones = board[oppositePlayerIndex][oppositePitIndex];
+        
+        board[oppositePlayerIndex][oppositePitIndex] = 0;
+        board[playerIndex][6] += capturedStones + 1;  // Add captured stones to player's Mancala
+    }
+}
+
+function playGame(pitIndex) {
+    if (playerTurn) {
+        moveStones(0, pitIndex);
+        captureStones(0, pitIndex);
+    } else {
+        moveStones(1, pitIndex);
+        captureStones(1, pitIndex);
+    }
+
+    // Switch turns
+    playerTurn = !playerTurn;
 }
 
 

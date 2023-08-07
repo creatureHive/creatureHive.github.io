@@ -1,0 +1,8 @@
+#canvas {
+    border: 2px solid black;
+    background:url("/pics/gameAssets/kitchen.png");
+    margin:auto;
+    /* this is the game box */
+    width: 75%;
+    height: 65%;
+}
