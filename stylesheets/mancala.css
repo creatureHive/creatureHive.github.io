@@ -1,8 +1,74 @@
 #canvas {
     border: 2px solid black;
-    background:url("/pics/gameAssets/kitchen.png");
     margin:auto;
     /* this is the game box */
-    width: 75%;
-    height: 65%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#visparent{
+    display: flex;
+    flex-direction: row;
+}
+#flexparent{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.pot{
+    background-color: aquamarine;
+    width: 75px;
+    height: 75px;
+    border: 5px solid black;
+    margin:5px;
+    z-index:0;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+#top{
+    margin-left:5px;
+    margin-top: 25px;
+    display:flex;
+    flex-direction: row;
+
+}
+#bottom{
+    display:flex;
+    flex-direction: row;
+    margin-left:5px;
+    margin-top:25px;
+    margin-bottom:25px;
+}
+.pit{
+    background-color: blueviolet;
+    width:125px;
+    height:175px;
+    border: 5px solid black;
+    margin:5px;
+    z-index:0;
+    margin-top:40px;
+}
+#start{
+    margin-top:10px;
+    margin-bottom:10px;
+}
+.circle{
+    width: 20px;
+    height: 20px;
+    background-color: #e74c3c;
+    border-radius: 50%;
+    z-index:1;
+    margin: 1px;
+    position: relative;
+}
+.circle:nth-child(odd) {
+    transform: translateY(-5px); /* Adjust as needed */
+}
+.circle-container {
+    display: flex;
+    flex-wrap: wrap;
+    max-height: 80px; /* Adjust as needed */
+    overflow:visible;
+    flex-direction: row; /* Change to row direction */
+    justify-content: flex-start; /* Align to the start */
 }
