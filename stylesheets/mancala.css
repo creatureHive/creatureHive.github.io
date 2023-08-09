@@ -1,10 +1,13 @@
 #canvas {
     border: 2px solid black;
-    margin:auto;
     /* this is the game box */
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+h1{
+    text-align: center;
+    
 }
 #visparent{
     display: flex;
@@ -71,4 +74,9 @@
     overflow:visible;
     flex-direction: row; /* Change to row direction */
     justify-content: flex-start; /* Align to the start */
+}
+#logs{
+    background-color: white;
+    text-align: left;
+    font-size: 16px;
 }
