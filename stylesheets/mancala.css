@@ -7,6 +7,9 @@
 }
 h1{
     text-align: center;
+    background-color: #987671;
+    border: #664147 3px solid;
+    margin-bottom: 0;
     
 }
 #visparent{
@@ -76,7 +79,16 @@ h1{
     justify-content: flex-start; /* Align to the start */
 }
 #logs{
-    background-color: white;
+    background-color: #987671;
+    border: #664147 3px solid;
     text-align: left;
-    font-size: 16px;
+    max-height: fit-content;
+    overflow: scroll;
+    
+}
+#logs h5{
+    margin-left: 5%;
+}
+#logs p{
+    font-size: 15px;
 }
