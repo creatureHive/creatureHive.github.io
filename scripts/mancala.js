@@ -324,6 +324,16 @@ function applyMove(state, move) {
         newState.agentScore+=captured;
         newState.board[oppositeIndex] = 0;
     }
+    if(possibleMovesForAgent(newState).length==0){
+        possibleMovesForPlayer(newState).forEach((pot) => {
+            newState.playerScore+=pot[0];
+        })
+    }
+    if(possibleMovesForPlayer(newState).length==0){
+        possibleMovesForAgent(newState).forEach((pot) => {
+            newState.agentScore+=pot[0];
+        })
+    }
 
     return newState;
 }
@@ -343,7 +353,7 @@ function evaluate(state) {
     let capturescore = 0;
 
     if(state.extraTurn){
-        extrascore = 1;
+        extrascore = 2;
     }
     if(state.capturePossible){
         capturescore=1;
