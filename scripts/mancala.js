@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     
     function distributeStones(clickedPot) {
-        updateLogs("Distributing stones...");
+        
         const circleContainers = clickedPot.querySelectorAll('.circle-container');
         const totalStones = calculateStones(clickedPot); // Calculate the number of stones
         timeToFinish = totalStones * 500;
@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         let sample = pots;
-
+        updateLogs("Distributing stones...");
         if (isPlayersTurn) {
             // If it's the player's turn, exclude the opponent's score pit
             sample = Array.from(pots).filter((container) => container !== oppScorePit);
@@ -125,7 +125,8 @@ document.addEventListener('DOMContentLoaded', () => {
                                         for (let i = capturingStones; i > 0; i--) {
                                             const capturedStones = document.createElement('div'); // Create a new element to represent captured stones
                                             capturedStones.classList.add('circle');
-                                            userScorePit.appendChild(capturedStones);
+                                            const pitContainer = userScorePit.getElementsByClassName('circle-container')[0];
+                                            pitContainer.appendChild(capturedStones);
                                         }
                                         
                                     } else {
@@ -133,7 +134,8 @@ document.addEventListener('DOMContentLoaded', () => {
                                         for (let i = capturingStones; i > 0; i--) {
                                             const capturedStones = document.createElement('div'); // Create a new element to represent captured stones
                                             capturedStones.classList.add('circle');
-                                            oppScorePit.appendChild(capturedStones);
+                                            const pitContainer = oppScorePit.getElementsByClassName('circle-container')[0];
+                                            pitContainer.appendChild(capturedStones);
                                         }
          
                                     }
@@ -205,10 +207,10 @@ document.addEventListener('DOMContentLoaded', () => {
             fakeBoard.push(numOfStones)
         })
         fakeBoard.push(calculateStones(oppScorePit))
-        updateLogs(fakeBoard)
         let state = {
             'board': [...fakeBoard],
             'extraTurn': false,
+            'capturePossible':false,
             'playerScore': calculateStones(userScorePit),    // Copy the player's score
             'agentScore': calculateStones(oppScorePit)       // Copy the agent's score
         };
@@ -234,6 +236,33 @@ function possibleMovesForAgent(state) {
         return possibleMoves;
 }
 
+function areAllEmpty(player){
+    let empty =true;
+    player.forEach((pot) => {
+        if(calculateStones(pot)!=0){
+            empty=false;
+        }
+    })
+    return empty;
+}
+
+function emptyPotsForAgent(state){
+    let agentPots=[];
+        for(i=7;i<13;i++){
+            agentPots.push([state.board[i], i]);
+        }
+        const emptyPots = agentPots.filter((pot) => pot[0] == 0);
+        return emptyPots;
+}
+function distance(source, target){
+    if(target-source>=0){
+        return target-source;
+    }else{
+        return target-source+13;
+    }
+
+}
+
 function possibleMovesForPlayer(state) {
      // Implement a function to return an array of possible moves for the agent in the given state
      let playerPots=[];
@@ -247,16 +276,30 @@ function possibleMovesForPlayer(state) {
 function applyMove(state, move) {
     // Copy the current state to avoid modifying the original state
     let newState = {
-            board: [...state.board],
-            extraTurn: false,
-            playerScore: state.playerScore,       // Copy the player's score
-            agentScore: state.agentScore          // Copy the agent's score
+            'board': [...state.board],
+            'extraTurn': false,
+            'capturePossible':false,
+            'playerScore': state.playerScore,       // Copy the player's score
+            'agentScore': state.agentScore          // Copy the agent's score
         };
     const potIndex = move
     let stones= newState.board[potIndex]
+    emptyPotsForAgent(state).forEach((pot) =>{
+        if(distance(potIndex,pot[1])==stones){
+            state.capturePossible=true;
+        }
+    })
     newState.board[potIndex] = 0
     let currentPotIndex = potIndex+1;
+    
+    
     while (stones> 0) {
+        if(currentPotIndex==13){
+            newState.agentScore++;
+        }
+        if(currentPotIndex == 6){
+            currentPotIndex++;
+        }
         if (currentPotIndex === newState.board.length) {
             // Wrap around to player's pots
             currentPotIndex = 0;
@@ -267,12 +310,19 @@ function applyMove(state, move) {
 
         currentPotIndex++;
     }
-
+    let finalPot=currentPotIndex-1;
+    
     // Check if the last stone landed in the player's score pit and give an extra turn if needed
-    if (currentPotIndex - 1 === 13) {
+    if (finalPot === 13) {
         newState.extraTurn = true;
     } else {
         newState.extraTurn = false;
+    }
+    if(emptyPotsForAgent(state).includes([0,finalPot])){
+        let oppositeIndex=(finalPot-12)*-1;
+        let captured = newState.board[oppositeIndex];
+        newState.agentScore+=captured;
+        newState.board[oppositeIndex] = 0;
     }
 
     return newState;
@@ -286,25 +336,27 @@ function evaluate(state) {
     const playerScore = state.playerScore;
     // Calculate the difference in Mancala scores
     const mancalaDifference = agentScore - playerScore;
+     //check if capture is possible
+
 
     let extrascore=0;
+    let capturescore = 0;
 
     if(state.extraTurn){
         extrascore = 1;
     }
+    if(state.capturePossible){
+        capturescore=1;
+    }
      // Combine these factors into an overall evaluation score
     // You can adjust the weights according to your strategy
-    const extraWeight =0.5;
-    const mancalaWeight = 0.3;
 
 //still need to configure capture
 
 
     const totalScore = (
-        mancalaDifference * mancalaWeight +
-        extrascore * extraWeight
+        mancalaDifference +extrascore+capturescore
     );
-
     return totalScore;
 }
 
@@ -342,6 +394,33 @@ function gameIsOver(state) {
     let agentPossibleMoves;
 
     if(!state){
+        if(areAllEmpty(playerpots)){
+            updateLogs("Moving remaining stones...")
+            let sum=0;
+            agentpots.forEach((pot) => {
+                sum+=calculateStones(pot);
+                pot.innerHTML =""
+            })
+            for (let i = sum; i > 0; i--) {
+                const remainingStones = document.createElement('div'); // Create a new element to represent captured stones
+                remainingStones.classList.add('circle');
+                const pitContainer = oppScorePit.getElementsByClassName('circle-container')[0];
+                pitContainer.appendChild(remainingStones);
+            }
+        }else if(areAllEmpty(agentpots)){
+            updateLogs("Moving remaining stones...")
+            let sum=0;
+            playerpots.forEach((pot) => {
+                sum+=calculateStones(pot);
+                pot.innerHTML =""
+            })
+            for (let i = sum; i > 0; i--) {
+                const remainingStones = document.createElement('div'); // Create a new element to represent captured stones
+                remainingStones.classList.add('circle');
+                const pitContainer = userScorePit.getElementsByClassName('circle-container')[0];
+                pitContainer.appendChild(remainingStones);
+            }
+        }
         //if checking in actual game, calculate possible game moves real time
     playerScore = calculateStones(userScorePit);
     agentScore = calculateStones(oppScorePit);
@@ -366,11 +445,12 @@ function gameIsOver(state) {
 }
 
 function updateLogs(message){
+    const gameContainer = document.getElementById("logs")
     const gamelog = document.getElementById("messages")
     const data = document.createElement("p");
     data.innerHTML = message;
     gamelog.appendChild(data);
-    gamelog.scrollTop = gamelog.scrollHeight;
+    gameContainer.scrollTop = gameContainer.scrollHeight;
 }
 
 function clearLogs(){
